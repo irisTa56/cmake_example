@@ -4,6 +4,11 @@ int add(int i, int j) {
     return i + j;
 }
 
+int fib(int n) {
+   if (n <= 1) return n;
+   return fib(n-1) + fib(n-2);
+}
+
 namespace py = pybind11;
 
 PYBIND11_MODULE(cmake_example, m) {
@@ -24,6 +29,10 @@ PYBIND11_MODULE(cmake_example, m) {
         Add two numbers
 
         Some other explanation about the add function.
+    )pbdoc");
+
+    m.def("fib", &fib, R"pbdoc(
+        Fibonacci.
     )pbdoc");
 
     m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
